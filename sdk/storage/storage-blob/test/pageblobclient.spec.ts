@@ -92,7 +92,7 @@ describe("PageBlobClient", () => {
 
       const properties = await blobClient.getProperties();
       assert.equal(properties.accessTier, options.tier);
-    } catch (err) {
+    } catch (err: any) {
       assert.ok(err.message.startsWith("The access tier is not supported for this blob type."));
     }
   });
@@ -202,7 +202,7 @@ describe("PageBlobClient", () => {
     let mdBlobServiceClient: BlobServiceClient;
     try {
       mdBlobServiceClient = getGenericBSU("MD_", "");
-    } catch (err) {
+    } catch (err: any) {
       // managed disk account is not properly configured
       return this.skip();
     }
@@ -266,7 +266,7 @@ describe("PageBlobClient", () => {
       await pageBlobClient.uploadPages("b".repeat(1024), 0, 1024, {
         transactionalContentCrc64: new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8]),
       });
-    } catch (err) {
+    } catch (err: any) {
       if (
         err instanceof Error &&
         err.message.startsWith(
@@ -296,7 +296,7 @@ describe("PageBlobClient", () => {
     try {
       new PageBlobClient(getSASConnectionStringFromEnvironment(), "", "blobName");
       assert.fail("Expecting an thrown error but didn't get one.");
-    } catch (error) {
+    } catch (error: any) {
       assert.equal(
         "Expecting non-empty strings for containerName and blobName parameters",
         error.message,
@@ -309,7 +309,7 @@ describe("PageBlobClient", () => {
     try {
       new PageBlobClient(getSASConnectionStringFromEnvironment(), "containerName", "");
       assert.fail("Expecting an thrown error but didn't get one.");
-    } catch (error) {
+    } catch (error: any) {
       assert.equal(
         "Expecting non-empty strings for containerName and blobName parameters",
         error.message,

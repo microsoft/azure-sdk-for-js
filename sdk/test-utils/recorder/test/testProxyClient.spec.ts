@@ -144,7 +144,7 @@ describe("TestProxyClient functions", () => {
         try {
           await client.start({ envSetupForPlayback: {} });
           throw new Error("should not have reached here, start() call should have failed");
-        } catch (error) {
+        } catch (error: any) {
           expect((error as RecorderError).name).to.equal("RecorderError");
           expect((error as RecorderError).message).to.equal("Start request failed.");
         }
@@ -162,7 +162,7 @@ describe("TestProxyClient functions", () => {
         try {
           await client.start({ envSetupForPlayback: {} });
           throw new Error("should not have reached here, start() call should have failed");
-        } catch (error) {
+        } catch (error: any) {
           expect((error as RecorderError).name).to.equal("RecorderError");
           expect((error as RecorderError).message).to.equal(
             "No recording ID returned for a successful start request."
@@ -197,7 +197,7 @@ describe("TestProxyClient functions", () => {
           try {
             await client.stop();
             throw new Error("should not have reached here, stop() call should have failed");
-          } catch (error) {
+          } catch (error: any) {
             expect((error as RecorderError).name).to.equal("RecorderError");
             expect((error as RecorderError).message).to.equal(
               "Bad state, recordingId is not defined when called stop."
@@ -220,7 +220,7 @@ describe("TestProxyClient functions", () => {
         try {
           await client.stop();
           throw new Error("should not have reached here, stop() call should have failed");
-        } catch (error) {
+        } catch (error: any) {
           expect((error as RecorderError).name).to.equal("RecorderError");
           expect((error as RecorderError).message).to.equal("Stop request failed.");
         }
@@ -299,7 +299,7 @@ describe("State Manager", function () {
     try {
       manager.state = "started";
       throw new Error("should not have reached here, previous assignment should have failed");
-    } catch (error) {
+    } catch (error: any) {
       expect((error as RecorderError).name).to.equal("RecorderError");
       expect((error as RecorderError).message).to.equal(
         "Already started, should not have called start again."
@@ -312,7 +312,7 @@ describe("State Manager", function () {
     try {
       manager.state = "stopped";
       throw new Error("should not have reached here, previous assignment should have failed");
-    } catch (error) {
+    } catch (error: any) {
       expect((error as RecorderError).name).to.equal("RecorderError");
       expect((error as RecorderError).message).to.equal(
         "Already stopped, should not have called stop again."

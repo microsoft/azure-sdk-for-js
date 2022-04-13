@@ -62,7 +62,7 @@ export const cliCredentialInternals = {
             resolve({ stdout: stdout, stderr: stderr, error });
           }
         );
-      } catch (err) {
+      } catch (err: any) {
         reject(err);
       }
     });
@@ -149,7 +149,7 @@ export class AzureCliCredential implements TokenCredential {
           };
           return returnValue;
         }
-      } catch (err) {
+      } catch (err: any) {
         const error = new Error(
           (err as Error).message || "Unknown error while trying to retrieve the access token"
         );

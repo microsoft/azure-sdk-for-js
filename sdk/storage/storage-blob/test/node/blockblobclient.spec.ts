@@ -515,7 +515,7 @@ describe("syncUploadFromURL", () => {
         },
       });
       assert.fail("Should have failed with unmet condition.");
-    } catch (err) {
+    } catch (err: any) {
       assert.deepStrictEqual(err.code, "TargetConditionNotMet");
     }
   });
@@ -534,7 +534,7 @@ describe("syncUploadFromURL", () => {
         },
       });
       assert.fail("Should have failed with unmet condition.");
-    } catch (err) {
+    } catch (err: any) {
       assert.deepStrictEqual(err.code, "SourceConditionNotMet");
     }
   });
@@ -551,7 +551,7 @@ describe("syncUploadFromURL", () => {
         sourceContentMD5: invalidMD5,
       });
       assert.fail("Should have failed with unmet condition.");
-    } catch (err) {
+    } catch (err: any) {
       assert.deepStrictEqual(err.code, "Md5Mismatch");
     }
   });
@@ -577,7 +577,7 @@ describe("syncUploadFromURL", () => {
       await blockBlobClient.syncUploadFromURL(sourceBlobURLWithSAS, {
         timeoutInSeconds: 1,
       });
-    } catch (err) {
+    } catch (err: any) {
       assert.deepStrictEqual(err.code, "OperationTimedOut");
       exceptionCaught = true;
     }

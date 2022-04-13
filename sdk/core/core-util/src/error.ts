@@ -33,7 +33,7 @@ export function getErrorMessage(e: unknown): string {
       } else {
         stringified = String(e);
       }
-    } catch (e) {
+    } catch (e: any) {
       stringified = "[unable to stringify input]";
     }
     return `Unknown error ${stringified}`;

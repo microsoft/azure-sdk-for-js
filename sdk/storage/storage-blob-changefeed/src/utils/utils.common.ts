@@ -81,7 +81,7 @@ export async function getYearsPaths(
       }
     }
     return years.sort((a, b) => a - b);
-  } catch (e) {
+  } catch (e: any) {
     span.setStatus({
       code: SpanStatusCode.ERROR,
       message: e.message,
@@ -132,7 +132,7 @@ export async function getSegmentsInYear(
       segments.push(item.name);
     }
     return segments;
-  } catch (e) {
+  } catch (e: any) {
     span.setStatus({
       code: SpanStatusCode.ERROR,
       message: e.message,

@@ -117,7 +117,7 @@ describe("Highlevel Node.js only", () => {
         abortSignal: aborter,
       });
       assert.fail();
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.name, "AbortError");
     }
   });
@@ -132,7 +132,7 @@ describe("Highlevel Node.js only", () => {
         singleUploadThreshold: 8 * MB,
       });
       assert.fail();
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.name, "AbortError");
     }
   });
@@ -157,7 +157,7 @@ describe("Highlevel Node.js only", () => {
         },
         chunkSize: 4 * MB,
       });
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.message, "The operation was aborted.", "Unexpected error caught: " + err);
     }
     assert.ok(eventTriggered);
@@ -183,7 +183,7 @@ describe("Highlevel Node.js only", () => {
         },
         singleUploadThreshold: 8 * MB,
       });
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.message, "The operation was aborted.", "Unexpected error caught: " + err);
     }
     assert.ok(eventTriggered);
@@ -209,7 +209,7 @@ describe("Highlevel Node.js only", () => {
       await fileClient.upload(Buffer.from("bb"), {
         conditions: { ifNoneMatch: "*" },
       });
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(
         err.details.errorCode,
         "PathAlreadyExists",
@@ -234,7 +234,7 @@ describe("Highlevel Node.js only", () => {
 
     try {
       await fileClient.upload(Buffer.from("bb"));
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(
         err.details.errorCode,
         "LeaseIdMissing",
@@ -277,7 +277,7 @@ describe("Highlevel Node.js only", () => {
       await fileClient.upload(Buffer.from("bb"), {
         conditions: { ifNoneMatch: "*", leaseId: leaseClient.leaseId },
       });
-    } catch (err) {
+    } catch (err: any) {
       errThrown = true;
       assert.equal(
         err.details.errorCode,
@@ -316,7 +316,7 @@ describe("Highlevel Node.js only", () => {
       await fileClient.upload(uploadedBuffer, {
         chunkSize: Math.floor((tempFileLargeLength - 1) / BLOCK_BLOB_MAX_BLOCKS),
       });
-    } catch (err) {
+    } catch (err: any) {
       if (err instanceof RangeError && err.message.includes("the number of chunks must be <=")) {
         exceptionCaught = true;
       }
@@ -348,7 +348,7 @@ describe("Highlevel Node.js only", () => {
     try {
       await fileClient.uploadStream(rs, { abortSignal: aborter });
       assert.fail();
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.name, "AbortError");
     }
   });
@@ -434,7 +434,7 @@ describe("Highlevel Node.js only", () => {
         abortSignal: aborter,
       });
       assert.fail();
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.name, "AbortError");
     }
   });
@@ -448,7 +448,7 @@ describe("Highlevel Node.js only", () => {
         singleUploadThreshold: 8 * MB,
       });
       assert.fail();
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.name, "AbortError");
     }
   });
@@ -470,7 +470,7 @@ describe("Highlevel Node.js only", () => {
           aborter.abort();
         },
       });
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.message, "The operation was aborted.", "Unexpected error caught: " + err);
     }
     assert.ok(eventTriggered);
@@ -495,7 +495,7 @@ describe("Highlevel Node.js only", () => {
         },
         singleUploadThreshold: 8 * MB,
       });
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.message, "The operation was aborted.", "Unexpected error caught: " + err);
     }
     assert.ok(eventTriggered);
@@ -519,7 +519,7 @@ describe("Highlevel Node.js only", () => {
         chunkSize: FILE_UPLOAD_MAX_CHUNK_SIZE,
         abortSignal: AbortController.timeout(20 * 1000), // takes too long to upload the file
       });
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.name, "AbortError");
     }
 
@@ -536,7 +536,7 @@ describe("Highlevel Node.js only", () => {
         chunkSize: FILE_UPLOAD_MAX_CHUNK_SIZE,
         abortSignal: AbortController.timeout(20 * 1000), // takes too long to upload the file
       });
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.name, "AbortError");
     }
   }).timeout(timeoutForLargeFileUploadingTest);
@@ -592,7 +592,7 @@ describe("Highlevel Node.js only", () => {
     try {
       await fileClient.uploadFile(tempFileSmall);
       await fileClient.readToBuffer(undefined, (buffer as any).constants.MAX_LENGTH + 1);
-    } catch (err) {
+    } catch (err: any) {
       error = err;
     }
     assert.ok(
@@ -633,7 +633,7 @@ describe("Highlevel Node.js only", () => {
         chunkSize: 4 * MB,
       });
       assert.fail();
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.name, "AbortError");
     }
   });
@@ -654,7 +654,7 @@ describe("Highlevel Node.js only", () => {
           aborter.abort();
         },
       });
-    } catch (err) {
+    } catch (err: any) {
       assert.equal(err.message, "The operation was aborted.", "Unexpected error caught: " + err);
     }
     assert.ok(eventTriggered);
@@ -691,7 +691,7 @@ describe("Highlevel Node.js only", () => {
     try {
       await fileClient.readToFile(__dirname);
       throw new Error("Test failure.");
-    } catch (err) {
+    } catch (err: any) {
       assert.notEqual(err.message, "Test failure.");
     }
   });

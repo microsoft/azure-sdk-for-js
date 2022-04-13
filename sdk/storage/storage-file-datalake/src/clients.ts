@@ -163,7 +163,7 @@ export class DataLakePathClient extends StorageClient {
             forceFlag: options.continueOnFailure,
             ...convertTracingToRequestOptionsBase(updatedOptions),
           });
-        } catch (e) {
+        } catch (e: any) {
           throw new DataLakeAclChangeFailedError(e, continuationToken);
         }
 
@@ -196,7 +196,7 @@ export class DataLakePathClient extends StorageClient {
       } while (continuationToken && !reachMaxBatches);
 
       return result;
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -334,7 +334,7 @@ export class DataLakePathClient extends StorageClient {
         properties: toProperties(options.metadata),
         ...convertTracingToRequestOptionsBase(updatedOptions),
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -369,7 +369,7 @@ export class DataLakePathClient extends StorageClient {
         succeeded: true,
         ...res,
       };
-    } catch (e) {
+    } catch (e: any) {
       if (e.details?.errorCode === "PathAlreadyExists") {
         span.setStatus({
           code: SpanStatusCode.ERROR,
@@ -404,7 +404,7 @@ export class DataLakePathClient extends StorageClient {
     const { span, updatedOptions } = createSpan("DataLakeFileClient-exists", options);
     try {
       return await this.blobClient.exists(updatedOptions);
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -447,7 +447,7 @@ export class DataLakePathClient extends StorageClient {
       } while (continuation !== undefined && continuation !== "");
 
       return response;
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -478,7 +478,7 @@ export class DataLakePathClient extends StorageClient {
         succeeded: true,
         ...res,
       };
-    } catch (e) {
+    } catch (e: any) {
       if (e.details?.errorCode === "PathNotFound") {
         span.setStatus({
           code: SpanStatusCode.ERROR,
@@ -522,7 +522,7 @@ export class DataLakePathClient extends StorageClient {
         abortSignal: options.abortSignal,
       });
       return toPathGetAccessControlResponse(response);
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -555,7 +555,7 @@ export class DataLakePathClient extends StorageClient {
         modifiedAccessConditions: options.conditions,
         ...convertTracingToRequestOptionsBase(updatedOptions),
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -584,7 +584,7 @@ export class DataLakePathClient extends StorageClient {
     );
     try {
       return this.setAccessControlRecursiveInternal("set", acl, updatedOptions);
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -613,7 +613,7 @@ export class DataLakePathClient extends StorageClient {
     );
     try {
       return this.setAccessControlRecursiveInternal("modify", acl, updatedOptions);
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -642,7 +642,7 @@ export class DataLakePathClient extends StorageClient {
     );
     try {
       return this.setAccessControlRecursiveInternal("remove", acl, updatedOptions);
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -675,7 +675,7 @@ export class DataLakePathClient extends StorageClient {
         modifiedAccessConditions: options.conditions,
         ...convertTracingToRequestOptionsBase(updatedOptions),
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -709,7 +709,7 @@ export class DataLakePathClient extends StorageClient {
         customerProvidedKey: undefined, // Doesn't support customer provided key in data lake package yet
         tracingOptions: updatedOptions.tracingOptions,
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -747,7 +747,7 @@ export class DataLakePathClient extends StorageClient {
         },
         updatedOptions
       );
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -781,7 +781,7 @@ export class DataLakePathClient extends StorageClient {
         customerProvidedKey: undefined, // Doesn't support customer provided key in data lake package yet
         tracingOptions: updatedOptions.tracingOptions,
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -873,7 +873,7 @@ export class DataLakePathClient extends StorageClient {
         ...convertTracingToRequestOptionsBase(updatedOptions),
         abortSignal: options.abortSignal,
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -937,7 +937,7 @@ export class DataLakeDirectoryClient extends DataLakePathClient {
           ...convertTracingToRequestOptionsBase(updatedOptions),
         },
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -998,7 +998,7 @@ export class DataLakeDirectoryClient extends DataLakePathClient {
           ...convertTracingToRequestOptionsBase(updatedOptions),
         },
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1193,7 +1193,7 @@ export class DataLakeFileClient extends DataLakePathClient {
           ...convertTracingToRequestOptionsBase(updatedOptions),
         },
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1251,7 +1251,7 @@ export class DataLakeFileClient extends DataLakePathClient {
           ...convertTracingToRequestOptionsBase(updatedOptions),
         },
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1340,7 +1340,7 @@ export class DataLakeFileClient extends DataLakePathClient {
       delete rawResponse._response.parsedHeaders.blobContentMD5;
 
       return response;
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1384,7 +1384,7 @@ export class DataLakeFileClient extends DataLakePathClient {
         },
         ...convertTracingToRequestOptionsBase(updatedOptions),
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1419,7 +1419,7 @@ export class DataLakeFileClient extends DataLakePathClient {
         modifiedAccessConditions: options.conditions,
         ...convertTracingToRequestOptionsBase(updatedOptions),
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1461,7 +1461,7 @@ export class DataLakeFileClient extends DataLakePathClient {
         size,
         updatedOptions
       );
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1508,7 +1508,7 @@ export class DataLakeFileClient extends DataLakePathClient {
           updatedOptions
         );
       }
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1634,7 +1634,7 @@ export class DataLakeFileClient extends DataLakePathClient {
         pathHttpHeaders: options.pathHttpHeaders,
         tracingOptions: updatedOptions.tracingOptions,
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1726,7 +1726,7 @@ export class DataLakeFileClient extends DataLakePathClient {
         pathHttpHeaders: options.pathHttpHeaders,
         tracingOptions: updatedOptions.tracingOptions,
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1815,7 +1815,7 @@ export class DataLakeFileClient extends DataLakePathClient {
           tracingOptions: updatedOptions.tracingOptions,
         });
       }
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1856,7 +1856,7 @@ export class DataLakeFileClient extends DataLakePathClient {
         count,
         updatedOptions
       );
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1910,7 +1910,7 @@ export class DataLakeFileClient extends DataLakePathClient {
       delete rawResponse.blobContentMD5;
       delete rawResponse._response.parsedHeaders.blobContentMD5;
       return response;
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
@@ -1960,7 +1960,7 @@ export class DataLakeFileClient extends DataLakePathClient {
         ...adaptedOptions,
         tracingOptions: updatedOptions.tracingOptions,
       });
-    } catch (e) {
+    } catch (e: any) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
         message: e.message,
